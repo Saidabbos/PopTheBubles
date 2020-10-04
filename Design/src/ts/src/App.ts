@@ -9,6 +9,10 @@ namespace ctb {
                 type: Phaser.AUTO,
                 width: App.CANVAS_WIDTH,
                 height: App.CANVAS_HEIGHT,
+                parent: 'game-container',
+                dom: {
+                    createContainer: false
+                },
                 scale: {
                     mode: FitScaleManager.detectBestScaleMode(),
                     autoCenter: Phaser.Scale.CENTER_BOTH

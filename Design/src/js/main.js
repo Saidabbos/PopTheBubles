@@ -6,6 +6,10 @@ var ctb;
                 type: Phaser.AUTO,
                 width: App.CANVAS_WIDTH,
                 height: App.CANVAS_HEIGHT,
+                parent: 'game-container',
+                dom: {
+                    createContainer: false
+                },
                 scale: {
                     mode: FitScaleManager.detectBestScaleMode(),
                     autoCenter: Phaser.Scale.CENTER_BOTH
@@ -267,7 +271,7 @@ var ctb;
     (function (scene) {
         class Boot extends Phaser.Scene {
             init() {
-                new FitScaleManager(this.game).setup();
+                // new FitScaleManager(this.game).setup();
             }
             create() {
                 game.scene.remove('Boot');

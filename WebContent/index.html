@@ -57,17 +57,71 @@
             overflow: hidden;
         }
 
+        #game-container {
+
+        }
+
         canvas {
             box-shadow: 0px 0px 20px #000000;
+        }
+        .game-box {
+            background-color: #00afde;
+            background-size: cover;
+            min-height: 100vh;
+            overflow: auto;
+        }
+        .frame {
+            width: 980px;
+            height: 600px;
+            display: block;
+            margin: 45px 110px 100px;
+            position: relative;
+            text-align: center;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-color: #3db8ff;
+            background-size: contain;
+            border: 3px solid brown;
+        }
+        .frame-in {
+            width: 980px;
+            height: 600px;
+            display: block;
+            overflow: hidden;
+            position: relative;
+            top: 0;
+            left: 0;
+            z-index: 4;
+        }
+        .container {
+            max-width: 1140px;
+            display: table;
+            margin: 0 auto;
+        }
+        header {
+            height: 170px;
         }
     </style>
 
     <script src="src/libs/polyfill.min.js"></script>
     <script src="src/libs/phaser.min.js"></script>
-    <script src="../Design/src/js/main.js"></script>
-<!--    <script src="src/main.js"></script>-->
+<!--    <script src="../Design/src/js/main.js"></script>-->
+    <script src="src/main.js"></script>
 
 </head>
 <body>
+<section>
+    <section class="game-box">
+        <header></header>
+        <div class="container">
+            <div class="frame">
+                <div class="frame-in">
+                    <div id="game-container"></div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+</section>
 </body>
 </html>
