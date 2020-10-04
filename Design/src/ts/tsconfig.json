@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "module": "amd",
+    "target": "es2015",
+    "outFile": "../js/main.js",
+    "sourceMap": true
+  },
+  "include": [
+    "lib/**/*",
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

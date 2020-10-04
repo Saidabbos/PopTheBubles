@@ -1,0 +1,204 @@
+{
+  "preloader": {
+    "files": [
+      {
+        "type": "image",
+        "key": "x Button",
+        "url": "assets/imgs/x Button.png",
+        "overwrite": false
+      },
+      {
+        "type": "image",
+        "key": "x Button HOVER EFFECT",
+        "url": "assets/imgs/x Button HOVER EFFECT.png",
+        "overwrite": false
+      },
+      {
+        "type": "image",
+        "key": "Sound HOVER EFFECT",
+        "url": "assets/imgs/Sound HOVER EFFECT.png",
+        "overwrite": false
+      },
+      {
+        "type": "image",
+        "key": "Sound",
+        "url": "assets/imgs/Sound.png",
+        "overwrite": false
+      },
+      {
+        "type": "image",
+        "key": "Try again page",
+        "url": "assets/imgs/Try again page.png",
+        "overwrite": false
+      },
+      {
+        "type": "image",
+        "key": "Break Star",
+        "url": "assets/imgs/Break Star.png",
+        "overwrite": false
+      },
+      {
+        "type": "image",
+        "key": "Exit warning",
+        "url": "assets/imgs/Exit warning.png",
+        "overwrite": false
+      },
+      {
+        "type": "image",
+        "key": "btnNO1",
+        "url": "assets/imgs/btnNO1.png",
+        "overwrite": false
+      },
+      {
+        "type": "image",
+        "key": "btnNO2",
+        "url": "assets/imgs/btnNO2.png",
+        "overwrite": false
+      },
+      {
+        "type": "image",
+        "key": "btnYES1",
+        "url": "assets/imgs/btnYES1.png",
+        "overwrite": false
+      },
+      {
+        "type": "image",
+        "key": "btnYES2",
+        "url": "assets/imgs/btnYES2.png",
+        "overwrite": false
+      },
+      {
+        "type": "image",
+        "key": "btnBACK1",
+        "url": "assets/imgs/btnBACK1.png",
+        "overwrite": false
+      },
+      {
+        "type": "image",
+        "key": "btnBACK2",
+        "url": "assets/imgs/btnBACK2.png",
+        "overwrite": false
+      },
+      {
+        "type": "image",
+        "key": "btnNEXT1",
+        "url": "assets/imgs/btnNEXT1.png",
+        "overwrite": false
+      },
+      {
+        "type": "image",
+        "key": "btnNEXT2",
+        "url": "assets/imgs/btnNEXT2.png",
+        "overwrite": false
+      },
+      {
+        "type": "image",
+        "key": "btnReplay1",
+        "url": "assets/imgs/btnReplay1.png",
+        "overwrite": false
+      },
+      {
+        "type": "image",
+        "key": "btnReplay2",
+        "url": "assets/imgs/btnReplay2.png",
+        "overwrite": false
+      },
+      {
+        "type": "image",
+        "key": "Collected Points",
+        "url": "assets/imgs/Collected Points.png",
+        "overwrite": false
+      },
+      {
+        "type": "image",
+        "key": "Completion page LATEST UPDATED",
+        "url": "assets/imgs/Completion page LATEST UPDATED.png",
+        "overwrite": false
+      },
+      {
+        "type": "image",
+        "key": "Trophy",
+        "url": "assets/imgs/Trophy.png",
+        "overwrite": false
+      },
+      {
+        "type": "image",
+        "key": "Instructions page  ALL ACTIVITY  TITLEs",
+        "url": "assets/imgs/Instructions page  ALL ACTIVITY  TITLEs.png",
+        "overwrite": false
+      },
+      {
+        "type": "image",
+        "key": "btnPLAY1",
+        "url": "assets/imgs/btnPLAY1.png",
+        "overwrite": false
+      },
+      {
+        "type": "image",
+        "key": "btnPLAY2",
+        "url": "assets/imgs/btnPLAY2.png",
+        "overwrite": false
+      },
+      {
+        "type": "image",
+        "key": "BG",
+        "url": "assets/imgs/BG.png",
+        "overwrite": false
+      },
+      {
+        "type": "image",
+        "key": "pop-the-bubbles-title",
+        "url": "assets/imgs/pop-the-bubbles-title.png",
+        "overwrite": false
+      },
+      {
+        "type": "image",
+        "key": "Bubble",
+        "url": "assets/imgs/Bubble.png",
+        "overwrite": false
+      },
+      {
+        "type": "atlas",
+        "key": "bubble-atlas",
+        "textureURL": "assets/imgs/atlas/bubble-atlas.png",
+        "atlasURL": "assets/imgs/atlas/bubble-atlas.json",
+        "format": "TEXTURE_ATLAS_JSON_HASH"
+      },
+      {
+        "type": "atlas",
+        "key": "turtle-idle-atlas",
+        "textureURL": "assets/imgs/atlas/turtle-idle-atlas.png",
+        "atlasURL": "assets/imgs/atlas/turtle-idle-atlas.json",
+        "format": "TEXTURE_ATLAS_JSON_HASH"
+      },
+      {
+        "type": "atlas",
+        "key": "turtle_shock-atlas",
+        "textureURL": "assets/imgs/atlas/turtle_shock-atlas.png",
+        "atlasURL": "assets/imgs/atlas/turtle_shock-atlas.json",
+        "format": "TEXTURE_ATLAS_JSON_HASH"
+      },
+
+      {"type":"audio","key":"warning page pop up sfx","url":["assets/sound/mp3/warning page pop up sfx.mp3"],"autoDecode":true},
+      {"type":"audio","key":"wrong sfx","url":["assets/sound/mp3/wrong sfx.mp3"],"autoDecode":true},
+      {"type":"audio","key":"Activity completion fantastic","url":["assets/sound/mp3/Activity completion fantastic.mp3"],"autoDecode":true},
+      {"type":"audio","key":"activity selection - button selection","url":["assets/sound/mp3/activity selection - button selection.mp3"],"autoDecode":true},
+      {"type":"audio","key":"button hover","url":["assets/sound/mp3/button hover.mp3"],"autoDecode":true},
+      {"type":"audio","key":"Goose no","url":["assets/sound/mp3/Goose no.mp3"],"autoDecode":true},
+      {"type":"audio","key":"Bachground ambience","url":["assets/sound/mp3/Bachground ambience.mp3"],"autoDecode":true},
+      {"type":"audio","key":"Help Salty","url":["assets/sound/mp3/Help Salty.mp3"],"autoDecode":true},
+      {"type":"audio","key":"drag from its spot","url":["assets/sound/mp3/drag from its spot.mp3"],"autoDecode":true},
+      {"type":"audio","key":"wrong drop","url":["assets/sound/mp3/wrong drop.mp3"],"autoDecode":true},
+      {"type":"audio","key":"correct drop","url":["assets/sound/mp3/correct drop.mp3"],"autoDecode":true},
+      {"type":"audio","key":"Fail - close one","url":["assets/sound/mp3/Fail - close one.mp3"],"autoDecode":true},
+      {"type":"audio","key":"next_round","url":["assets/sound/mp3/next_round.mp3"],"autoDecode":true}
+    ]
+  },
+  "meta": {
+    "generated": "1548311514538",
+    "app": "Phaser Editor",
+    "url": "http://phasereditor.boniatillo.com",
+    "version": "1.0",
+    "copyright": "Arian Fornaris (c) 2015,2016"
+  }
+}

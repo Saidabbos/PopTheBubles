@@ -1,0 +1,14 @@
+{
+	"useImages": false,
+	"words": [
+		{"word":"بجج", "audioKey": "بجج", "imageKey": "بجج"},
+		{"word":"جبي", "audioKey": "جبي", "imageKey": "جبي"},
+		{"word":"عجي", "audioKey": "عجي", "imageKey": "عجي"},
+		{"word":"عيب", "audioKey": "عيب", "imageKey": "عيب"},
+		{"word":"عيج", "audioKey": "عيج", "imageKey": "عيج"},
+		{"word":"يبع", "audioKey": "يبع", "imageKey": "يبع"},
+		{"word":"يجع", "audioKey": "يجع", "imageKey": "يجع"},
+		{"word":"يعج", "audioKey": "يعج", "imageKey": "يعج"}
+	],
+	"failsNumToLose": 3
+}
