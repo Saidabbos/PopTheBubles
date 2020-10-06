@@ -271,7 +271,30 @@ var ctb;
     (function (scene) {
         class Boot extends Phaser.Scene {
             init() {
-                // new FitScaleManager(this.game).setup();
+                this.game.scale.transformX = (pageX) => {
+                    let offsetLeft = 0;
+                    let parentElement = game.canvas.parentElement;
+                    while (parentElement) {
+                        if (parentElement.offsetLeft) {
+                            offsetLeft = parentElement.offsetLeft;
+                            break;
+                        }
+                        parentElement = parentElement.parentElement;
+                    }
+                    return (pageX - offsetLeft) * this.game.scale.displayScale.x;
+                };
+                this.game.scale.transformY = (pageY) => {
+                    let offsetTop = 0;
+                    let parentElement = game.canvas.parentElement;
+                    while (parentElement) {
+                        if (parentElement.offsetTop) {
+                            offsetTop = parentElement.offsetTop;
+                            break;
+                        }
+                        parentElement = parentElement.parentElement;
+                    }
+                    return (pageY - offsetTop) * this.game.scale.displayScale.y;
+                };
             }
             create() {
                 game.scene.remove('Boot');
