@@ -112,7 +112,7 @@ namespace ctb.screen {
             ];
             for (let i:number = 0; i < randomized.length; i++) {
                 let w:Phaser.GameObjects.Container = new Phaser.GameObjects.Container(this.scene, positions[i]['x']+20+83, positions[i]['y']+23+65);
-                w.add(w["-image-"] = new Phaser.GameObjects.Image(this.scene, 0, 0,'Bubble'));
+                w.add(w["-image-"] = this.scene.add.sprite(0, 0, null));
                 w["-image-"].setOrigin(0.5, 0.5);
                 this.words.push(w);
 
@@ -132,13 +132,12 @@ namespace ctb.screen {
                     txt.setText(randomized[i]["word"]);
                     w.add(txt);
                 }
-                w.alpha = 0;
 
                 w["-letter-"] = txt;
                 w["-word-text-"] = randomized[i]["word"];
                 this.gameplayContainer.add(w);
 
-                this.addIdleAnim(w);
+                Preloader.playAnim('bubble_idle', w["-image-"]);
             }
 
             for (let word of this.words) {
@@ -151,15 +150,19 @@ namespace ctb.screen {
                     if (word["-word-text-"] == this.gameplay.currentWordData["word"]) {
                         this.onCorrectAnswer();
 
+                        word.parentContainer.remove(word);
                         this.showPopBubble(word);
 
-                        this.fadeBubblesOut();
+                        // this.fadeBubblesOut();
 
                         this.tfCorrectAnswerCount.setText(String(this.gameplay.correctAnswersCount));
                     } else {
                         let lost:boolean = this.onWrongAnswer();
 
                         this.shakeBubble(word);
+
+                        Preloader.playAnim('turtle_shock', this.character, this.playIdle);
+                        delayedCall(200, ()=>this.scene.sound.add("Turtle animation sfx").play());
 
                         delayedCall(550, ()=>{
                             if (!lost) {
@@ -198,7 +201,7 @@ namespace ctb.screen {
             });
             this.gameplayContainer.add(this.tfTimer);
 
-            let seconds:number = 90;
+            let seconds:number = 120;
             this.renderTimer(seconds);
             this.timerEvent = this.scene.time.addEvent({ delay: 1000, repeat: seconds });
             this.timerEvent.callback = ()=>{
@@ -217,25 +220,6 @@ namespace ctb.screen {
             this.tfTimer.setText((min < 10 ? '0'+min:min)
                 +":"+
                 (sec < 10 ? '0'+sec:sec));
-        }
-
-        private fadeBubblesIn() {
-            for (let bubble of this.words) {
-                this.scene.tweens.add({
-                    targets: bubble,
-                    alpha: 1,
-                    duration: 1000
-                });
-            }
-        }
-        private fadeBubblesOut() {
-            for (let bubble of this.words) {
-                this.scene.tweens.add({
-                    targets: bubble,
-                    alpha: 0,
-                    duration: 1000
-                });
-            }
         }
 
         private showPopBubble(bubble) {
@@ -286,14 +270,6 @@ namespace ctb.screen {
 
                 delayedCall(750, ()=>{this.setInputEnabled(true);});
             });
-
-            if (this.gameplay.isNewRound()) {
-                if (!this.gameplay.isRoundsComplete()) {
-                    this.fadeBubblesIn();
-                }
-            } else {
-                this.fadeBubblesIn();
-            }
         }
 
         private onNewRound(showOut:boolean):void {
@@ -306,29 +282,23 @@ namespace ctb.screen {
             }
         }
 
-        private soundGooseYes = null;
+        private sfxBubblePopCounter:number = 0;
         public onCorrectAnswer(): boolean {
             let i: number = this.gameplay.getCurrentTotalAnswersCount();
 
             let completed:boolean = this.gameplay.onCorrectAnswer();
 
-            this.soundGooseYes = this.scene.sound.add("correct drop");
-            this.soundGooseYes.play();
-
-            Preloader.playAnim('turtle_shock', this.character, this.playIdle);
+            this.scene.sound.add(this.sfxBubblePopCounter++%2==0?'Bubble Pop 1':'Bubble Pop 2').play();
 
             return completed;
         }
 
-        private soundWrongDrop = null;
         public onWrongAnswer(): boolean {
             let i: number = this.gameplay.getCurrentTotalAnswersCount();
 
             let lost:boolean = this.gameplay.onWrongAnswer();
 
-            this.soundWrongDrop = this.scene.sound.add("wrong drop");
-            this.soundWrongDrop.play();
-            this.scene.sound.add("Goose no").play();
+            this.scene.sound.add("Wrong click").play();
 
             if (this.idleDelayedCall != null) {
                 destroyDelayedCall(this.idleDelayedCall);

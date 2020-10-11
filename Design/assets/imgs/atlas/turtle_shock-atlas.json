@@ -210,7 +210,7 @@
 }
 ,{
 	"filename": "turtle_shock0026",
-	"frame": {"x":947,"y":1367,"w":313,"h":271},
+	"frame": {"x":947,"y":821,"w":313,"h":271},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":313,"h":271},
@@ -218,7 +218,7 @@
 }
 ,{
 	"filename": "turtle_shock0027",
-	"frame": {"x":947,"y":1640,"w":313,"h":271},
+	"frame": {"x":947,"y":548,"w":313,"h":271},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":313,"h":271},
@@ -226,7 +226,7 @@
 }
 ,{
 	"filename": "turtle_shock0028",
-	"frame": {"x":1262,"y":2,"w":313,"h":271},
+	"frame": {"x":947,"y":1367,"w":313,"h":271},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":313,"h":271},
@@ -234,7 +234,7 @@
 }
 ,{
 	"filename": "turtle_shock0029",
-	"frame": {"x":1262,"y":275,"w":313,"h":271},
+	"frame": {"x":947,"y":1640,"w":313,"h":271},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":313,"h":271},
@@ -250,7 +250,7 @@
 }
 ,{
 	"filename": "turtle_shock0031",
-	"frame": {"x":947,"y":1640,"w":313,"h":271},
+	"frame": {"x":1262,"y":275,"w":313,"h":271},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":313,"h":271},
@@ -259,38 +259,6 @@
 ,{
 	"filename": "turtle_shock0032",
 	"frame": {"x":1262,"y":548,"w":313,"h":271},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":313,"h":271},
-	"sourceSize": {"w":313,"h":271}
-}
-,{
-	"filename": "turtle_shock0033",
-	"frame": {"x":1262,"y":821,"w":313,"h":271},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":313,"h":271},
-	"sourceSize": {"w":313,"h":271}
-}
-,{
-	"filename": "turtle_shock0034",
-	"frame": {"x":1262,"y":1094,"w":313,"h":271},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":313,"h":271},
-	"sourceSize": {"w":313,"h":271}
-}
-,{
-	"filename": "turtle_shock0035",
-	"frame": {"x":1262,"y":1367,"w":313,"h":271},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":313,"h":271},
-	"sourceSize": {"w":313,"h":271}
-}
-,{
-	"filename": "turtle_shock0036",
-	"frame": {"x":1262,"y":1640,"w":313,"h":271},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":313,"h":271},

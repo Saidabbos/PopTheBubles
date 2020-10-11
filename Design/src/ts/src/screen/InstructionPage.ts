@@ -22,7 +22,7 @@ namespace ctb.screen {
             this._btnPlay.once('pointerup', onPlayClick);
             setupButtonTextureBased(this._btnPlay, 'btnPLAY1', 'btnPLAY2');
 
-            this.instrTxt = this.scene.add.text(game.scale.width / 2, game.scale.height / 2, "Help Salty Turtle pop all the word bubbles. Listen to the word and tap on the bubble.", {
+            this.instrTxt = this.scene.add.text(game.scale.width / 2, game.scale.height / 2, "Help Salty Turtle pop all the word\nbubbles. Listen to the word and tap on\nthe bubble.", {
                 "fontFamily": "Kids Rock Demo",
                 "fontSize": 30,
                 "color": "#43425D",
@@ -30,7 +30,7 @@ namespace ctb.screen {
             });
             this.instrTxt.setOrigin(0.5, 0.5);
             this.instrTxt.setWordWrapWidth(650);
-            this.instrTxt.setLineSpacing(7);
+            this.instrTxt.setLineSpacing(10);
 
             this._btnSoundInstruction = new Phaser.GameObjects.Image(this.scene, 800 - 105, 156 - 50, 'Sound');
             this._btnSoundInstruction.setInteractive({cursor: 'pointer'});

@@ -184,14 +184,16 @@
       {"type":"audio","key":"Activity completion fantastic","url":["assets/sound/mp3/Activity completion fantastic.mp3"],"autoDecode":true},
       {"type":"audio","key":"activity selection - button selection","url":["assets/sound/mp3/activity selection - button selection.mp3"],"autoDecode":true},
       {"type":"audio","key":"button hover","url":["assets/sound/mp3/button hover.mp3"],"autoDecode":true},
-      {"type":"audio","key":"Goose no","url":["assets/sound/mp3/Goose no.mp3"],"autoDecode":true},
       {"type":"audio","key":"Bachground ambience","url":["assets/sound/mp3/Bachground ambience.mp3"],"autoDecode":true},
       {"type":"audio","key":"Help Salty","url":["assets/sound/mp3/Help Salty.mp3"],"autoDecode":true},
       {"type":"audio","key":"drag from its spot","url":["assets/sound/mp3/drag from its spot.mp3"],"autoDecode":true},
-      {"type":"audio","key":"wrong drop","url":["assets/sound/mp3/wrong drop.mp3"],"autoDecode":true},
       {"type":"audio","key":"correct drop","url":["assets/sound/mp3/correct drop.mp3"],"autoDecode":true},
       {"type":"audio","key":"Fail - close one","url":["assets/sound/mp3/Fail - close one.mp3"],"autoDecode":true},
-      {"type":"audio","key":"next_round","url":["assets/sound/mp3/next_round.mp3"],"autoDecode":true}
+      {"type":"audio","key":"next_round","url":["assets/sound/mp3/next_round.mp3"],"autoDecode":true},
+      {"type":"audio","key":"Wrong click","url":["assets/sound/mp3/Wrong click.mp3"],"autoDecode":true},
+      {"type":"audio","key":"Bubble Pop 1","url":["assets/sound/mp3/Bubble Pop 1.mp3"],"autoDecode":true},
+      {"type":"audio","key":"Bubble Pop 2","url":["assets/sound/mp3/Bubble Pop 2.mp3"],"autoDecode":true},
+      {"type":"audio","key":"Turtle animation sfx","url":["assets/sound/mp3/Turtle animation sfx.mp3"],"autoDecode":true}
     ]
   },
   "meta": {
