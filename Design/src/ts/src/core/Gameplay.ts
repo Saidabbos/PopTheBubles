@@ -68,7 +68,7 @@ namespace ctb.core {
             this.correctAnswersCount++;
             this.correctAnswersCountThisRound++;
 
-            this.nextLetterDelay = 3500;
+            this.nextLetterDelay = 1500;
 
             return this.onLetterChosen();
         }

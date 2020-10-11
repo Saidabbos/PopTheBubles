@@ -12,6 +12,15 @@ module ctb.scene {
                 'frameRate': 24,
                 'atlas': 'bubble-atlas'
             },
+            'bubble_idle': {
+                'start': 0,
+                'end': 50,
+                'padNum': 4,
+                'prefix': 'idle',
+                'repeat': -1,
+                'frameRate': 24,
+                'atlas': 'bubble-atlas'
+            },
             'turtle_idle': {
                 'start': 0,
                 'end': 35,
@@ -23,7 +32,7 @@ module ctb.scene {
             },
             'turtle_shock': {
                 'start': 0,
-                'end': 36,
+                'end': 32,
                 'padNum': 4,
                 'prefix': 'turtle_shock',
                 'repeat': 0,

@@ -219,7 +219,7 @@ var ctb;
             onCorrectAnswer() {
                 this.correctAnswersCount++;
                 this.correctAnswersCountThisRound++;
-                this.nextLetterDelay = 3500;
+                this.nextLetterDelay = 1500;
                 return this.onLetterChosen();
             }
             onWrongAnswer() {
@@ -394,6 +394,15 @@ var ctb;
                 'frameRate': 24,
                 'atlas': 'bubble-atlas'
             },
+            'bubble_idle': {
+                'start': 0,
+                'end': 50,
+                'padNum': 4,
+                'prefix': 'idle',
+                'repeat': -1,
+                'frameRate': 24,
+                'atlas': 'bubble-atlas'
+            },
             'turtle_idle': {
                 'start': 0,
                 'end': 35,
@@ -405,7 +414,7 @@ var ctb;
             },
             'turtle_shock': {
                 'start': 0,
-                'end': 36,
+                'end': 32,
                 'padNum': 4,
                 'prefix': 'turtle_shock',
                 'repeat': 0,
@@ -548,8 +557,7 @@ var ctb;
                         this.idleDelayedCall = delayedCall(Math.floor(Math.random() * 5) * 500, this.playIdle);
                     });
                 };
-                this.soundGooseYes = null;
-                this.soundWrongDrop = null;
+                this.sfxBubblePopCounter = 0;
                 this.wfsnd = null;
                 this.showCompleteWindow = (score, starScore) => {
                     let completeWindow = new screen.CompleteWindow(this.scene, (target) => {
@@ -653,7 +661,7 @@ var ctb;
                 ];
                 for (let i = 0; i < randomized.length; i++) {
                     let w = new Phaser.GameObjects.Container(this.scene, positions[i]['x'] + 20 + 83, positions[i]['y'] + 23 + 65);
-                    w.add(w["-image-"] = new Phaser.GameObjects.Image(this.scene, 0, 0, 'Bubble'));
+                    w.add(w["-image-"] = this.scene.add.sprite(0, 0, null));
                     w["-image-"].setOrigin(0.5, 0.5);
                     this.words.push(w);
                     let txt;
@@ -673,11 +681,10 @@ var ctb;
                         txt.setText(randomized[i]["word"]);
                         w.add(txt);
                     }
-                    w.alpha = 0;
                     w["-letter-"] = txt;
                     w["-word-text-"] = randomized[i]["word"];
                     this.gameplayContainer.add(w);
-                    this.addIdleAnim(w);
+                    Preloader.playAnim('bubble_idle', w["-image-"]);
                 }
                 for (let word of this.words) {
                     word.setSize(word["-image-"].width, word["-image-"].height);
@@ -686,13 +693,16 @@ var ctb;
                         this.setInputEnabled(false);
                         if (word["-word-text-"] == this.gameplay.currentWordData["word"]) {
                             this.onCorrectAnswer();
+                            word.parentContainer.remove(word);
                             this.showPopBubble(word);
-                            this.fadeBubblesOut();
+                            // this.fadeBubblesOut();
                             this.tfCorrectAnswerCount.setText(String(this.gameplay.correctAnswersCount));
                         }
                         else {
                             let lost = this.onWrongAnswer();
                             this.shakeBubble(word);
+                            Preloader.playAnim('turtle_shock', this.character, this.playIdle);
+                            delayedCall(200, () => this.scene.sound.add("Turtle animation sfx").play());
                             delayedCall(550, () => {
                                 if (!lost) {
                                     this.setInputEnabled(true);
@@ -725,7 +735,7 @@ var ctb;
                     "align": 'center'
                 });
                 this.gameplayContainer.add(this.tfTimer);
-                let seconds = 90;
+                let seconds = 120;
                 this.renderTimer(seconds);
                 this.timerEvent = this.scene.time.addEvent({ delay: 1000, repeat: seconds });
                 this.timerEvent.callback = () => {
@@ -741,24 +751,6 @@ var ctb;
                 this.tfTimer.setText((min < 10 ? '0' + min : min)
                     + ":" +
                     (sec < 10 ? '0' + sec : sec));
-            }
-            fadeBubblesIn() {
-                for (let bubble of this.words) {
-                    this.scene.tweens.add({
-                        targets: bubble,
-                        alpha: 1,
-                        duration: 1000
-                    });
-                }
-            }
-            fadeBubblesOut() {
-                for (let bubble of this.words) {
-                    this.scene.tweens.add({
-                        targets: bubble,
-                        alpha: 0,
-                        duration: 1000
-                    });
-                }
             }
             showPopBubble(bubble) {
                 let bubble_poping = this.scene.add.sprite(bubble.x, bubble.y, null);
@@ -805,14 +797,6 @@ var ctb;
                     this.playCorrectAudio();
                     delayedCall(750, () => { this.setInputEnabled(true); });
                 });
-                if (this.gameplay.isNewRound()) {
-                    if (!this.gameplay.isRoundsComplete()) {
-                        this.fadeBubblesIn();
-                    }
-                }
-                else {
-                    this.fadeBubblesIn();
-                }
             }
             onNewRound(showOut) {
                 this.scene.sound.add("next_round").play();
@@ -824,17 +808,13 @@ var ctb;
             onCorrectAnswer() {
                 let i = this.gameplay.getCurrentTotalAnswersCount();
                 let completed = this.gameplay.onCorrectAnswer();
-                this.soundGooseYes = this.scene.sound.add("correct drop");
-                this.soundGooseYes.play();
-                Preloader.playAnim('turtle_shock', this.character, this.playIdle);
+                this.scene.sound.add(this.sfxBubblePopCounter++ % 2 == 0 ? 'Bubble Pop 1' : 'Bubble Pop 2').play();
                 return completed;
             }
             onWrongAnswer() {
                 let i = this.gameplay.getCurrentTotalAnswersCount();
                 let lost = this.gameplay.onWrongAnswer();
-                this.soundWrongDrop = this.scene.sound.add("wrong drop");
-                this.soundWrongDrop.play();
-                this.scene.sound.add("Goose no").play();
+                this.scene.sound.add("Wrong click").play();
                 if (this.idleDelayedCall != null) {
                     destroyDelayedCall(this.idleDelayedCall);
                     this.idleDelayedCall = null;
@@ -929,7 +909,7 @@ var ctb;
                 this._btnPlay.setInteractive({ cursor: 'pointer' });
                 this._btnPlay.once('pointerup', onPlayClick);
                 setupButtonTextureBased(this._btnPlay, 'btnPLAY1', 'btnPLAY2');
-                this.instrTxt = this.scene.add.text(game.scale.width / 2, game.scale.height / 2, "Help Salty Turtle pop all the word bubbles. Listen to the word and tap on the bubble.", {
+                this.instrTxt = this.scene.add.text(game.scale.width / 2, game.scale.height / 2, "Help Salty Turtle pop all the word\nbubbles. Listen to the word and tap on\nthe bubble.", {
                     "fontFamily": "Kids Rock Demo",
                     "fontSize": 30,
                     "color": "#43425D",
@@ -937,7 +917,7 @@ var ctb;
                 });
                 this.instrTxt.setOrigin(0.5, 0.5);
                 this.instrTxt.setWordWrapWidth(650);
-                this.instrTxt.setLineSpacing(7);
+                this.instrTxt.setLineSpacing(10);
                 this._btnSoundInstruction = new Phaser.GameObjects.Image(this.scene, 800 - 105, 156 - 50, 'Sound');
                 this._btnSoundInstruction.setInteractive({ cursor: 'pointer' });
                 this._btnSoundInstruction.on('pointerup', onSndClick);
