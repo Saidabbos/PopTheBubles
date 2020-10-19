@@ -30,8 +30,17 @@ module ctb.scene {
                 'frameRate': 24,
                 'atlas': 'turtle-idle-atlas'
             },
-            'turtle_shock': {
+            'turtle_shock_in': {
                 'start': 0,
+                'end': 16,
+                'padNum': 4,
+                'prefix': 'turtle_shock',
+                'repeat': 0,
+                'frameRate': 20,
+                'atlas': 'turtle_shock-atlas'
+            },
+            'turtle_shock_out': {
+                'start': 16,
                 'end': 32,
                 'padNum': 4,
                 'prefix': 'turtle_shock',

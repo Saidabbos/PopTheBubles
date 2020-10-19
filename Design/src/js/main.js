@@ -385,8 +385,17 @@ var ctb;
                 'frameRate': 24,
                 'atlas': 'turtle-idle-atlas'
             },
-            'turtle_shock': {
+            'turtle_shock_in': {
                 'start': 0,
+                'end': 16,
+                'padNum': 4,
+                'prefix': 'turtle_shock',
+                'repeat': 0,
+                'frameRate': 20,
+                'atlas': 'turtle_shock-atlas'
+            },
+            'turtle_shock_out': {
+                'start': 16,
                 'end': 32,
                 'padNum': 4,
                 'prefix': 'turtle_shock',
@@ -562,7 +571,7 @@ var ctb;
                         this.showInstructionPage();
                     });
                     this.setInputEnabled(false);
-                    delayedCall(1500, () => {
+                    delayedCall(2750, () => {
                         setPageBackground("bg-blue");
                         this.add(tryAgainWindow);
                         tryAgainWindow.show(score, starScore);
@@ -674,8 +683,12 @@ var ctb;
                         else {
                             let lost = this.onWrongAnswer();
                             this.shakeBubble(word);
-                            Preloader.playAnim('turtle_shock', this.character, this.playIdle);
-                            delayedCall(200, () => this.scene.sound.add("Turtle animation sfx").play());
+                            Preloader.playAnim('turtle_shock_in', this.character, () => {
+                                delayedCall(800, () => {
+                                    Preloader.playAnim('turtle_shock_out', this.character, this.playIdle);
+                                });
+                            });
+                            this.scene.sound.add("Turtle animation sfx").play();
                             delayedCall(550, () => {
                                 if (!lost) {
                                     this.setInputEnabled(true);
@@ -772,7 +785,6 @@ var ctb;
                 });
             }
             onNewRound(showOut) {
-                this.scene.sound.add("next_round").play();
                 this.setInputEnabled(false);
                 if (showOut) {
                     this.prepareRound();
@@ -792,6 +804,8 @@ var ctb;
                     destroyDelayedCall(this.idleDelayedCall);
                     this.idleDelayedCall = null;
                 }
+                if (!lost)
+                    delayedCall(2500, () => { this.playCorrectAudio(); });
                 return lost;
             }
             onCloseClick() {
@@ -882,14 +896,14 @@ var ctb;
                 this._btnPlay.setInteractive({ cursor: 'pointer' });
                 this._btnPlay.once('pointerup', onPlayClick);
                 setupButtonTextureBased(this._btnPlay, 'btnPLAY1', 'btnPLAY2');
-                this.instrTxt = this.scene.add.text(game.scale.width / 2, game.scale.height / 2, "Help Salty Turtle pop all the word\nbubbles. Listen to the word and tap on\nthe bubble.", {
+                this.instrTxt = this.scene.add.text(game.scale.width / 2, game.scale.height / 2, "Help Salty Turtle pop all the word bubbles.\nListen to the word and tap on the bubble.", {
                     "fontFamily": "Kids Rock Demo",
                     "fontSize": 30,
                     "color": "#43425D",
                     "align": 'center'
                 });
                 this.instrTxt.setOrigin(0.5, 0.5);
-                this.instrTxt.setWordWrapWidth(650);
+                this.instrTxt.setWordWrapWidth(710);
                 this.instrTxt.setLineSpacing(10);
                 this._btnSoundInstruction = new Phaser.GameObjects.Image(this.scene, 800 - 105, 156 - 50, 'Sound');
                 this._btnSoundInstruction.setInteractive({ cursor: 'pointer' });
