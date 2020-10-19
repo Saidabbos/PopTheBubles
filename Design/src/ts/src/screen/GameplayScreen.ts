@@ -161,8 +161,12 @@ namespace ctb.screen {
 
                         this.shakeBubble(word);
 
-                        Preloader.playAnim('turtle_shock', this.character, this.playIdle);
-                        delayedCall(200, ()=>this.scene.sound.add("Turtle animation sfx").play());
+                        Preloader.playAnim('turtle_shock_in', this.character, ()=>{
+                            delayedCall(800, ()=>{
+                                Preloader.playAnim('turtle_shock_out', this.character, this.playIdle);
+                            });
+                        });
+                        this.scene.sound.add("Turtle animation sfx").play()
 
                         delayedCall(550, ()=>{
                             if (!lost) {
@@ -273,8 +277,6 @@ namespace ctb.screen {
         }
 
         private onNewRound(showOut:boolean):void {
-            this.scene.sound.add("next_round").play();
-
             this.setInputEnabled(false);
 
             if (showOut) {
@@ -304,6 +306,8 @@ namespace ctb.screen {
                 destroyDelayedCall(this.idleDelayedCall);
                 this.idleDelayedCall = null;
             }
+
+            if (!lost) delayedCall(2500, ()=>{this.playCorrectAudio();});
 
             return lost;
         }
@@ -399,7 +403,7 @@ namespace ctb.screen {
                 this.showInstructionPage();
             });
             this.setInputEnabled(false);
-            delayedCall(1500, () => {
+            delayedCall(2750, () => {
                 setPageBackground("bg-blue");
 
                 this.add(tryAgainWindow);
