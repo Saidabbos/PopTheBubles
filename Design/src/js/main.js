@@ -391,7 +391,7 @@ var ctb;
                 'padNum': 4,
                 'prefix': 'turtle_shock',
                 'repeat': 0,
-                'frameRate': 20,
+                'frameRate': 24,
                 'atlas': 'turtle_shock-atlas'
             },
             'turtle_shock_out': {
@@ -553,7 +553,7 @@ var ctb;
                         playBtnClickAnim(target);
                     });
                     this.setInputEnabled(false);
-                    delayedCall(2000, () => {
+                    delayedCall(2500, () => {
                         setPageBackground("bg-blue");
                         this.add(completeWindow);
                         completeWindow.show(score, starScore);
@@ -571,7 +571,7 @@ var ctb;
                         this.showInstructionPage();
                     });
                     this.setInputEnabled(false);
-                    delayedCall(2750, () => {
+                    delayedCall(3000, () => {
                         setPageBackground("bg-blue");
                         this.add(tryAgainWindow);
                         tryAgainWindow.show(score, starScore);
@@ -616,6 +616,12 @@ var ctb;
             }
             onSoundClick() {
                 this.playCorrectAudio();
+            }
+            destroyIdleDelayedCallIfExists() {
+                if (this.idleDelayedCall != null) {
+                    destroyDelayedCall(this.idleDelayedCall);
+                    this.idleDelayedCall = null;
+                }
             }
             showGameplay() {
                 setPageBackground("bg-australia");
@@ -683,13 +689,16 @@ var ctb;
                         else {
                             let lost = this.onWrongAnswer();
                             this.shakeBubble(word);
-                            Preloader.playAnim('turtle_shock_in', this.character, () => {
-                                delayedCall(800, () => {
-                                    Preloader.playAnim('turtle_shock_out', this.character, this.playIdle);
+                            delayedCall(500, () => {
+                                this.destroyIdleDelayedCallIfExists();
+                                Preloader.playAnim('turtle_shock_in', this.character, () => {
+                                    delayedCall(800, () => {
+                                        Preloader.playAnim('turtle_shock_out', this.character, this.playIdle);
+                                    });
                                 });
+                                this.scene.sound.add("Turtle animation sfx").play();
                             });
-                            this.scene.sound.add("Turtle animation sfx").play();
-                            delayedCall(550, () => {
+                            delayedCall(3200, () => {
                                 if (!lost) {
                                     this.setInputEnabled(true);
                                 }
@@ -800,10 +809,7 @@ var ctb;
                 let i = this.gameplay.getCurrentTotalAnswersCount();
                 let lost = this.gameplay.onWrongAnswer();
                 this.scene.sound.add("Wrong click").play();
-                if (this.idleDelayedCall != null) {
-                    destroyDelayedCall(this.idleDelayedCall);
-                    this.idleDelayedCall = null;
-                }
+                this.destroyIdleDelayedCallIfExists();
                 if (!lost)
                     delayedCall(2500, () => { this.playCorrectAudio(); });
                 return lost;
