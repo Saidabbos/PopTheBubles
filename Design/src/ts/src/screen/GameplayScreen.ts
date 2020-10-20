@@ -78,6 +78,12 @@ namespace ctb.screen {
                 this.idleDelayedCall = delayedCall(Math.floor(Math.random()*5)*500, this.playIdle);
             });
         };
+        private destroyIdleDelayedCallIfExists():void {
+            if (this.idleDelayedCall != null) {
+                destroyDelayedCall(this.idleDelayedCall);
+                this.idleDelayedCall = null;
+            }
+        }
 
         public showGameplay(): void {
             setPageBackground("bg-australia");
@@ -161,14 +167,17 @@ namespace ctb.screen {
 
                         this.shakeBubble(word);
 
-                        Preloader.playAnim('turtle_shock_in', this.character, ()=>{
-                            delayedCall(800, ()=>{
-                                Preloader.playAnim('turtle_shock_out', this.character, this.playIdle);
+                        delayedCall(500, ()=>{
+                            this.destroyIdleDelayedCallIfExists();
+                            Preloader.playAnim('turtle_shock_in', this.character, ()=>{
+                                delayedCall(800, ()=>{
+                                    Preloader.playAnim('turtle_shock_out', this.character, this.playIdle);
+                                });
                             });
+                            this.scene.sound.add("Turtle animation sfx").play();
                         });
-                        this.scene.sound.add("Turtle animation sfx").play()
 
-                        delayedCall(550, ()=>{
+                        delayedCall(3200, ()=>{
                             if (!lost) {
                                 this.setInputEnabled(true);
                             }
@@ -302,10 +311,7 @@ namespace ctb.screen {
 
             this.scene.sound.add("Wrong click").play();
 
-            if (this.idleDelayedCall != null) {
-                destroyDelayedCall(this.idleDelayedCall);
-                this.idleDelayedCall = null;
-            }
+            this.destroyIdleDelayedCallIfExists();
 
             if (!lost) delayedCall(2500, ()=>{this.playCorrectAudio();});
 
@@ -381,7 +387,7 @@ namespace ctb.screen {
                 playBtnClickAnim(target);
             });
             this.setInputEnabled(false);
-            delayedCall(2000, () => {
+            delayedCall(2500, () => {
                 setPageBackground("bg-blue");
 
                 this.add(completeWindow);
@@ -403,7 +409,7 @@ namespace ctb.screen {
                 this.showInstructionPage();
             });
             this.setInputEnabled(false);
-            delayedCall(2750, () => {
+            delayedCall(3000, () => {
                 setPageBackground("bg-blue");
 
                 this.add(tryAgainWindow);
