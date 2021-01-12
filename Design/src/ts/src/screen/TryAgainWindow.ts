@@ -16,7 +16,7 @@ namespace ctb.screen {
 
             this._bg = new Phaser.GameObjects.Image(this.scene, 0, 0, 'Try again page');
             this._bg.setOrigin(0, 0);
-            this._bg.setInteractive();
+            // this._bg.setInteractive();
             this._star = new Phaser.GameObjects.Image(this.scene, 400, 415, 'Break Star');
             this._btnBack = new Phaser.GameObjects.Image(this.scene, 600, 580, 'btnBACK1');
             this._btnReplay = new Phaser.GameObjects.Image(this.scene, 765, 580, 'btnReplay1');

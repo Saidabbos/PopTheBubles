@@ -12,7 +12,7 @@ namespace ctb.screen {
 
             this._instructionPage = new Phaser.GameObjects.Image(this.scene, 0-105, 0-48, 'Instructions page  ALL ACTIVITY  TITLEs');
             this._instructionPage.setOrigin(0, 0);
-            this._instructionPage.setInteractive();
+            // this._instructionPage.setInteractive();
 
             this._instructionPageTitle = new Phaser.GameObjects.Image(this.scene, 495, 105, 'pop-the-bubbles-title');
             this._instructionPageTitle.setScale(0.65);

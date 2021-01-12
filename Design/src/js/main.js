@@ -89,7 +89,8 @@ function setupButtonTextureBased(btn, texture, hoverTexture) {
     btn.on('pointerdown', () => { btn.setTexture(hoverTexture); });
     btn.on('pointerover', () => { btn.setTexture(hoverTexture); game.scene.getAt(0).sound.add("button hover").play(); });
     btn.on('pointerout', () => { btn.setTexture(texture); });
-    btn.on('pointerup', () => { btn.setTexture(texture); game.scene.getAt(0).sound.add('activity selection - button selection').play(); });
+    btn.on('pointerup', () => { if (btn.parentContainer)
+        btn.setTexture(texture); game.scene.getAt(0).sound.add('activity selection - button selection').play(); });
 }
 function playBtnClickAnim(target) {
     let sc = target.hasOwnProperty("defScale") ? target["defScale"] : 1;
@@ -342,11 +343,11 @@ var ctb;
                     });
                 }
                 if (sprite.anims.currentAnim) {
-                    sprite.anims.currentAnim.off('complete');
+                    sprite.off('animationcomplete');
                 }
                 sprite.anims.stop();
                 sprite.play(animKey);
-                sprite.anims.currentAnim.once('complete', () => {
+                sprite.on('animationcomplete', () => {
                     if (onComplete)
                         onComplete();
                 });
@@ -416,7 +417,7 @@ var ctb;
                 super(scene);
                 this._areYouSurePage = new Phaser.GameObjects.Image(this.scene, -105, 0 - 48, 'Exit warning');
                 this._areYouSurePage.setOrigin(0, 0);
-                this._areYouSurePage.setInteractive();
+                // this._areYouSurePage.setInteractive();
                 this._btnSureYes = new Phaser.GameObjects.Image(this.scene, game.scale.width / 2 - 95, 485 - 50, 'btnYES1');
                 this._btnSureYes.setInteractive({ cursor: 'pointer' });
                 this._btnSureYes.once('pointerup', onYes);
@@ -444,7 +445,7 @@ var ctb;
                 this.setPosition(-104.5, -48);
                 this._bgComplete = new Phaser.GameObjects.Image(this.scene, 0, 0, 'Completion page LATEST UPDATED');
                 this._bgComplete.setOrigin(0, 0);
-                this._bgComplete.setInteractive();
+                // this._bgComplete.setInteractive();
                 this._cup = new Phaser.GameObjects.Image(this.scene, 400, 410, 'Trophy');
                 this._btnBack = new Phaser.GameObjects.Image(this.scene, 570, 570, 'btnBACK1');
                 this._btnReplay = new Phaser.GameObjects.Image(this.scene, 720, 570, 'btnReplay1');
@@ -547,7 +548,7 @@ var ctb;
                     }, (target) => {
                         playBtnClickAnim(target);
                         this.destroyGameplay();
-                        this.remove(completeWindow);
+                        completeWindow.destroy(true);
                         this.showInstructionPage();
                     }, (target) => {
                         playBtnClickAnim(target);
@@ -567,7 +568,7 @@ var ctb;
                     }, (target) => {
                         playBtnClickAnim(target);
                         this.destroyGameplay();
-                        this.remove(tryAgainWindow);
+                        tryAgainWindow.destroy(true);
                         this.showInstructionPage();
                     });
                     this.setInputEnabled(false);
@@ -583,7 +584,7 @@ var ctb;
                 this._gameStage = new Phaser.GameObjects.Image(this.scene, game.scale.width / 2, game.scale.height / 2, 'BG');
                 this._gameStage.setOrigin(0.5, 0.5);
                 this._gameStage.setScale(1.02);
-                this._gameStage.setInteractive();
+                // this._gameStage.setInteractive();
                 this.add(this._gameStage);
                 this._btnClose = new Phaser.GameObjects.Image(this.scene, 1025 - 105, 100 - 50, 'x Button');
                 this._btnClose.setInteractive({ cursor: 'pointer' });
@@ -681,7 +682,7 @@ var ctb;
                         this.setInputEnabled(false);
                         if (word["-word-text-"] == this.gameplay.currentWordData["word"]) {
                             this.onCorrectAnswer();
-                            word.parentContainer.remove(word);
+                            word.destroy(true);
                             this.showPopBubble(word);
                             // this.fadeBubblesOut();
                             this.tfCorrectAnswerCount.setText(String(this.gameplay.correctAnswersCount));
@@ -829,7 +830,7 @@ var ctb;
                 };
                 this.instructionPage = new screen.InstructionPage(this.scene, (target) => {
                     playBtnClickAnim(target);
-                    this.remove(this.instructionPage);
+                    this.instructionPage.destroy(true);
                     this.showGameplay();
                     if (this.wfsnd) {
                         this.wfsnd.stop();
@@ -848,12 +849,12 @@ var ctb;
                 this.pauseSounds();
                 this.areYouSureWindow = new screen.AreYouSureWindow(this.scene, () => {
                     this.scene.tweens.resumeAll();
-                    this.remove(this.areYouSureWindow);
+                    this.areYouSureWindow.destroy(true);
                     this.destroyGameplay();
                     this.showInstructionPage();
                 }, () => {
                     this.scene.tweens.resumeAll();
-                    this.remove(this.areYouSureWindow);
+                    this.areYouSureWindow.destroy(true);
                     this.unpauseSounds();
                     resumeAllDelayedCalls();
                     setPageBackground("bg-australia");
@@ -863,7 +864,8 @@ var ctb;
             setInputEnabled(enabled) {
                 if (enabled) {
                     for (let a of this.words)
-                        a.setInteractive({ cursor: 'pointer' });
+                        if (a.parentContainer)
+                            a.setInteractive({ cursor: 'pointer' });
                 }
                 else {
                     for (let a of this.words)
@@ -895,7 +897,7 @@ var ctb;
                 super(scene);
                 this._instructionPage = new Phaser.GameObjects.Image(this.scene, 0 - 105, 0 - 48, 'Instructions page  ALL ACTIVITY  TITLEs');
                 this._instructionPage.setOrigin(0, 0);
-                this._instructionPage.setInteractive();
+                // this._instructionPage.setInteractive();
                 this._instructionPageTitle = new Phaser.GameObjects.Image(this.scene, 495, 105, 'pop-the-bubbles-title');
                 this._instructionPageTitle.setScale(0.65);
                 this._btnPlay = new Phaser.GameObjects.Image(this.scene, game.scale.width / 2, 480 - 50, 'btnPLAY1');
@@ -937,7 +939,7 @@ var ctb;
                 this.setPosition(-106, -48);
                 this._bg = new Phaser.GameObjects.Image(this.scene, 0, 0, 'Try again page');
                 this._bg.setOrigin(0, 0);
-                this._bg.setInteractive();
+                // this._bg.setInteractive();
                 this._star = new Phaser.GameObjects.Image(this.scene, 400, 415, 'Break Star');
                 this._btnBack = new Phaser.GameObjects.Image(this.scene, 600, 580, 'btnBACK1');
                 this._btnReplay = new Phaser.GameObjects.Image(this.scene, 765, 580, 'btnReplay1');
@@ -1003,3 +1005,4 @@ var ctb;
         screen.TryAgainWindow = TryAgainWindow;
     })(screen = ctb.screen || (ctb.screen = {}));
 })(ctb || (ctb = {}));
+//# sourceMappingURL=main.js.map

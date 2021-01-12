@@ -90,7 +90,7 @@ function setupButtonTextureBased(btn:Phaser.GameObjects.Image, texture, hoverTex
     btn.on('pointerdown', ()=>{btn.setTexture(hoverTexture)});
     btn.on('pointerover', ()=>{btn.setTexture(hoverTexture);game.scene.getAt(0).sound.add("button hover").play();});
     btn.on('pointerout', ()=>{btn.setTexture(texture)});
-    btn.on('pointerup', ()=>{btn.setTexture(texture);game.scene.getAt(0).sound.add('activity selection - button selection').play();});
+    btn.on('pointerup', ()=>{if (btn.parentContainer)btn.setTexture(texture);game.scene.getAt(0).sound.add('activity selection - button selection').play();});
 }
 
 

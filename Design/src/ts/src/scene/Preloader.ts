@@ -101,11 +101,11 @@ module ctb.scene {
                 });
             }
             if (sprite.anims.currentAnim) {
-                sprite.anims.currentAnim.off('complete');
+                sprite.off('animationcomplete');
             }
             sprite.anims.stop();
             sprite.play(animKey);
-            sprite.anims.currentAnim.once('complete', ()=>{
+            sprite.on('animationcomplete', ()=>{
                 if (onComplete) onComplete();
             });
             return sprite;
