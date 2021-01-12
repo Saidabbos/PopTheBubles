@@ -10,7 +10,7 @@ namespace ctb.screen {
 
             this._areYouSurePage = new Phaser.GameObjects.Image(this.scene, -105, 0-48, 'Exit warning');
             this._areYouSurePage.setOrigin(0, 0);
-            this._areYouSurePage.setInteractive();
+            // this._areYouSurePage.setInteractive();
 
             this._btnSureYes = new Phaser.GameObjects.Image(this.scene, game.scale.width / 2 - 95, 485-50, 'btnYES1');
             this._btnSureYes.setInteractive({cursor: 'pointer'});

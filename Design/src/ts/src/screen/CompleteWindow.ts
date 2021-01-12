@@ -17,7 +17,7 @@ namespace ctb.screen {
 
             this._bgComplete = new Phaser.GameObjects.Image(this.scene, 0, 0, 'Completion page LATEST UPDATED');
             this._bgComplete.setOrigin(0, 0);
-            this._bgComplete.setInteractive();
+            // this._bgComplete.setInteractive();
             this._cup = new Phaser.GameObjects.Image(this.scene, 400, 410, 'Trophy');
             this._btnBack = new Phaser.GameObjects.Image(this.scene, 570, 570, 'btnBACK1');
             this._btnReplay = new Phaser.GameObjects.Image(this.scene, 720, 570, 'btnReplay1');
